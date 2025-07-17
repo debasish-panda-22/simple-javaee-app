@@ -1,14 +1,18 @@
-
 - name: Deploy Java EE App
   hosts: localhost
+  become: yes                           # ← enable privilege escalation
+  become_user: root                     # ← (optional; default is root)
+  vars:
+    ansible_become_pass: "{{ ansible_become_password }}"  
   tasks:
     - name: Copy WAR file
       copy:
         src: "{{ jenkins_workspace }}/target/simple-javaee-app.war"
-        dest: "/var/lib/tomcat9/webapps/"
+        dest: "/var/lib/tomcat9/webapps/simple-javaee-app.war"
         owner: tomcat
         group: tomcat
         mode: '0644'
+
     - name: Restart Tomcat
       service:
         name: tomcat9
