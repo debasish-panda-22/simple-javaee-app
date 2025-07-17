@@ -12,6 +12,8 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh 'echo $PATH'      
+                sh 'which mvn'
                 sh 'mvn clean package'
             }
         }
