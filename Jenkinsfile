@@ -33,9 +33,8 @@ pipeline {
             steps {
                 // Use -b to become root (sudo) when copying into Tomcat's webapps
                 sh '''
-                   ansible-playbook -i inventory.ini deploy.yml \
-                     -b \
-                     --extra-vars "jenkins_workspace=${WORKSPACE}"
+                   ansible-playbook -i inventory.ini deploy.yml -b --extra-vars "jenkins_workspace=${WORKSPACE}
+
                 '''
             }
         }
