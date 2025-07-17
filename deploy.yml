@@ -1,7 +1,6 @@
 
 - name: Deploy Java EE App
   hosts: localhost
-  become: yes
   tasks:
     - name: Copy WAR file
       copy:
