@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/yourusername/simple-javaee-app.git', branch: 'master'
+                git url: 'https://github.com/debasish-panda-22/simple-javaee-app.git', branch: 'master'
             }
         }
         stage('Build') {
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'ansible-playbook -i ansible/hosts ansible/deploy.yml --extra-vars "jenkins_workspace=$WORKSPACE"'
+                sh 'ansible-playbook -i inventory.ini deploy.yml --extra-vars "jenkins_workspace=$WORKSPACE"'
             }
         }
     }
