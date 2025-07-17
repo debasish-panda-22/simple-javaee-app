@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven' // Must match name in Global Tool Configuration
-        jdk 'JDK17'   // Must match name in Global Tool Configuration
+        maven 'Maven'
+        jdk 'JDK17'
     }
     stages {
         stage('Checkout') {
@@ -10,10 +10,15 @@ pipeline {
                 git url: 'https://github.com/debasish-panda-22/simple-javaee-app.git', branch: 'master'
             }
         }
+        stage('Debug') {
+            steps {
+                sh 'echo $PATH'
+                sh 'which mvn'
+                sh 'mvn --version'
+            }
+        }
         stage('Build') {
             steps {
-                sh 'echo $PATH'      
-                sh 'which mvn'
                 sh 'mvn clean package'
             }
         }
@@ -25,8 +30,10 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/*.war', allowEmptyArchive: true
-            cleanWs()
+            node('') {
+                archiveArtifacts artifacts: 'target/*.war', allowEmptyArchive: true
+                cleanWs()
+            }
         }
     }
 }
