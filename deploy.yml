@@ -2,6 +2,7 @@
 - name: Deploy Java EE App
   hosts: localhost
   become: yes
+  become_user: root
   tasks:
     - name: Copy WAR file
       copy:
