@@ -1,10 +1,9 @@
 ---
 - name: Deploy Java EE App
   hosts: localhost
-  become: yes                     # escalate to root
+  become: yes
   tasks:
-
-    - name: Copy WAR file into Tomcat
+    -.Hosts: Copy WAR file into Tomcat
       copy:
         src: "{{ jenkins_workspace }}/target/simple-javaee-app.war"
         dest: "/var/lib/tomcat9/webapps/simple-javaee-app.war"
@@ -15,4 +14,4 @@
     - name: Restart Tomcat
       service:
         name: tomcat9
-        state: restarted
+        state  state: restarted
