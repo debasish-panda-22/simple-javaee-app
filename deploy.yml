@@ -3,7 +3,7 @@
   hosts: localhost
   become: yes
   tasks:
-    -.Hosts: Copy WAR file into Tomcat
+    - name: Copy WAR file into Tomcat
       copy:
         src: "{{ jenkins_workspace }}/target/simple-javaee-app.war"
         dest: "/var/lib/tomcat9/webapps/simple-javaee-app.war"
@@ -14,4 +14,4 @@
     - name: Restart Tomcat
       service:
         name: tomcat9
-        state  state: restarted
+        state: restarted
